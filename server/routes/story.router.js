@@ -21,11 +21,11 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   console.log(req.body);
-  const queryText = `INSERT INTO stories (user_id, title, body) 
-    VALUES ($1, $2, $3) RETURNING *`;
+  const queryText = `INSERT INTO stories (user_id, title, body, category_id, likes, loves, claps) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
 
   pool
-    .query(queryText, [req.body.user_id, req.body.title, req.body.body])
+    .query(queryText, [req.body.user_id, req.body.title, req.body.body, req.body.category_id, req.body.likes, req.body.loves, req.body.claps])
     .then((result) => {
       res.send(result.rows[0]);
     })
