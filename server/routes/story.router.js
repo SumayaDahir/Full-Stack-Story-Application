@@ -3,9 +3,10 @@ const router = express.Router();
 const pool = require("../modules/pool.js");
 
 router.get("/", (req, res) => {
-  const queryText = `SELECT stories.*, users.username
-                       FROM stories
-                       JOIN users ON stories.user_id = users.id`;
+  const queryText = `SELECT stories.*, "user".username
+  FROM stories
+  JOIN "user" ON stories.user_id = "user".id
+`;
 
   pool
     .query(queryText)
@@ -21,11 +22,11 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   console.log(req.body);
-  const queryText = `INSERT INTO stories (user_id, title, body, category_id, likes, loves, claps) 
-    VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
+  const queryText = `INSERT INTO stories (user_id, profile_picture, title, body, category_id, likes, loves, claps) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`;
 
   pool
-    .query(queryText, [req.body.user_id, req.body.title, req.body.body, req.body.category_id, req.body.likes, req.body.loves, req.body.claps])
+    .query(queryText, [req.body.user_id, req.body.profile_picture, req.body.title, req.body.body, req.body.category_id, req.body.likes, req.body.loves, req.body.claps])
     .then((result) => {
       res.send(result.rows[0]);
     })
