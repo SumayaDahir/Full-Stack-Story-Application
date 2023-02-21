@@ -8,11 +8,27 @@ const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
-// Handles Ajax request for user information if user is authenticated
-router.get('/', rejectUnauthenticated, (req, res) => {
-  // Send back user object from the session (previously queried from the database)
-  res.send(req.user);
+// // Handles Ajax request for user information if user is authenticated
+// router.get('/', rejectUnauthenticated, (req, res) => {
+//   // Send back user object from the session (previously queried from the database)
+//   res.send(req.user);
+// });
+
+
+
+router.get("/", rejectUnauthenticated, (req, res) => {
+  const queryText = "SELECT * FROM users";
+  pool
+    .query(queryText)
+    .then(() => {
+      res.send(req.user);
+    })
+    .catch((err) => {
+      console.error("Error in GET users", err);
+      res.sendStatus(500);
+    });
 });
+
 
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
@@ -21,11 +37,18 @@ router.post('/register', (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
 
-  const queryText = `INSERT INTO "user" (username, password)
-    VALUES ($1, $2) RETURNING id`;
-  pool
-    .query(queryText, [username, password])
-    .then(() => res.sendStatus(201))
+  const queryText = `INSERT INTO users (username, email, password, profile_picture) 
+    VALUES ($1, $2, $3, $4) RETURNING *`;
+    pool
+    .query(queryText, [
+      req.body.username,
+      req.body.email,
+      req.body.password,
+      req.body.profile_picture,
+    ])
+    .then((result) => {
+      res.send(result.rows[0]);
+    })
     .catch((err) => {
       console.log('User registration failed: ', err);
       res.sendStatus(500);
@@ -46,5 +69,46 @@ router.post('/logout', (req, res) => {
   req.logout();
   res.sendStatus(200);
 });
+
+
+
+router.delete('/:id', (req, res) => {
+  const userId = req.params.id;
+  const queryText = 'DELETE FROM users WHERE id=$1';
+
+  pool.query(queryText, [userId])
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.error('Error', err);
+      res.sendStatus(500);
+    });
+});
+
+
+router.put('/:id', (req, res) => {
+  const userId = req.params.id;
+  const { username, password,  profile_picture} = req.body;
+  console.log(req.body)
+  const queryText = `UPDATE users SET username = $1, password = $2,  profile_picture = $3 WHERE id = $4`;
+
+  pool.query(queryText, [username, password, profile_picture, userId])
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.error('Error', err);
+      res.sendStatus(500);
+    });
+});
+
+module.exports = router;
+
+
+
+
+
+
 
 module.exports = router;
