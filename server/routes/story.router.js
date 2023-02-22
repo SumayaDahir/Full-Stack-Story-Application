@@ -3,13 +3,13 @@ const router = express.Router();
 const pool = require("../modules/pool.js");
 
 router.get("/", (req, res) => {
-  const queryText = `SELECT stories.*, "user".username
-  FROM stories
-  JOIN "user" ON stories.user_id = "user".id
+  const queryText = `SELECT * FROM "stories" WHERE user_id = $1 
+                 
+                       
 `;
 
   pool
-    .query(queryText)
+    .query(queryText, [req.user.id])
     .then((result) => {
       res.send(result.rows);
     })

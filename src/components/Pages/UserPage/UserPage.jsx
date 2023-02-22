@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import LogOutButton from '../../Shared/LogOutButton/LogOutButton';
 import {useSelector, useDispatch} from 'react-redux';
-import storySaga from '../../../redux/sagas/story.saga';
+//import storySaga from '../../../redux/sagas/story.saga';
 
 
 function UserPage() {
@@ -20,7 +20,7 @@ function UserPage() {
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
-      <h3>This is Maya's Page</h3>
+      <h3>This is {user.username} page.</h3>
  
       {stories.map((story) => (
         <div key={story.id}>
