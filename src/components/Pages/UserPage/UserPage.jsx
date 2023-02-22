@@ -4,21 +4,39 @@ import { useState } from 'react';
 import LogOutButton from '../../Shared/LogOutButton/LogOutButton';
 import {useSelector, useDispatch} from 'react-redux';
 import './UserPage.css'
-//import storySaga from '../../../redux/sagas/story.saga';
+//import storySaga from '../../../redisux/sagas/story.saga';
+import categorySaga from '../../../redux/sagas/category.saga';
+
 
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   const stories = useSelector((store) => store.story)
-  console.log(stories)
+  const categories = useSelector((store) => store.category)
+  console.log("in categories" , categories)
   const [title, setTitle ]= useState('')
   const [body, setBody] = useState('')
+
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({type: 'FETCH_STORY'});
+    dispatch({type: 'FETCH_CATEGORY'});
   }, []);
+ 
+  const handleSubmit = () => {
+    dispatch({
+      type: 'ADD_STORY',
+      payload: {
+        title,
+        body
+      }
+    });
+    // setTitle('')
+    // setBody('')
+  }
 
 
   return (
@@ -49,8 +67,19 @@ function UserPage() {
         required
         onChange={(event)=> setBody(event.target.value)}/>
        </label>
+
+      
        <br />
-       <button>#categories</button> <button>Add Story</button> <button>Delete Story</button>
+       <label htmlFor="category">#categories</label>
+       <select name="category" onChange={(event) => (event.target.value)} id="category">
+       <option value="">Select Category</option>
+       {categories.map((category) => (
+        <option key={category.id}> {category.name} </option>
+       ))}
+       </select>
+      
+       <button type='button' onClick={handleSubmit}>Add Story</button> 
+       <button>Delete Story</button>
         
           </div>
        <br />
