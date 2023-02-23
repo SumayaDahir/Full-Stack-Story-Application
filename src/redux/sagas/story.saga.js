@@ -36,11 +36,25 @@ function* deleteStory(action) {
   }
 }
 
+function* updateStory(action) {
+  try{
+   
+    yield axios.put(`api/story/${action.payload.id}`, {body:action.payload.body});
+    console.log("this is id" , action.payload.id)
+
+    yield put({
+      type:"FETCH_STORY",
+    })
+  } catch(error) {
+    console.log("Error updating story", error)
+  }
+}
 
 function* storySaga() {
   yield takeLatest("FETCH_STORY", fetchStory);
-  yield takeLatest("ADD_STORY", addStory);
+  yield takeLatest("ADD_STORY",   addStory);
   yield takeLatest("DELETE_STORY", deleteStory);
+  yield takeLatest("UPDATE_STORY", updateStory)
 
 };
 

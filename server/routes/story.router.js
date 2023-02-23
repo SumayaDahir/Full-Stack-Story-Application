@@ -61,10 +61,11 @@ router.delete("/:id", (req, res) => {
   
   router.put('/:id', (req, res) => {
     const storyId = req.params.id;
-    const { title, body } = req.body;
-    const queryText = `UPDATE stories SET title = $1, body = $2 WHERE id = $3`;
+    const { body } = req.body;
+    console.log(req.body)
+    const queryText = `UPDATE stories SET body = $1 WHERE id = $2`;
   
-    pool.query(queryText, [title, body, storyId])
+    pool.query(queryText, [body, storyId])
       .then(() => {
         res.sendStatus(204);
       })
