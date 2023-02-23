@@ -24,9 +24,24 @@ function* addStory(action) {
   }
 }
 
+function* deleteStory(action) {
+  try { 
+    yield axios.delete(`/api/story/${action.payload.id}`);
+    console.log("in action", action)
+    yield put ({
+      type: "FETCH_STORY",
+    });
+  } catch (error) {
+      console.log("User adding story failed", error);
+  }
+}
+
+
 function* storySaga() {
   yield takeLatest("FETCH_STORY", fetchStory);
   yield takeLatest("ADD_STORY", addStory);
+  yield takeLatest("DELETE_STORY", deleteStory);
+
 };
 
 export default storySaga;

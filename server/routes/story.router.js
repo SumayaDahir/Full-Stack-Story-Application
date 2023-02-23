@@ -22,14 +22,14 @@ router.get("/", rejectUnauthenticated, (req, res) => {
 
 
 router.post("/", (req, res) => {
-  console.log(req.body);
+  console.log("in post ROUTE", req.body);
+  const userId = req.user.id; 
+
   const queryText = `INSERT INTO stories (user_id, profile_picture, title, body, category_id, likes, loves, claps) 
-  VALUES ($1, $2, $3, $4, $5, 0, 0, 0) RETURNING *`
-  
-    const userId = req.user.id; 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`;
 
   pool
-    .query(queryText, [userId, req.body.title, req.body.body, req.body.category_id])
+    .query(queryText, [userId, req.body.profile_picture, req.body.title, req.body.body, req.body.category_id, req.body.likes, req.body.loves, req.body.claps])
     .then((result) => {
       res.send(result.rows[0]);
     })
