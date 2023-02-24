@@ -30,6 +30,7 @@ router.post("/", (req, res) => {
   pool
     .query(queryText, [
       userId,
+      req.body.profile_picture,
       req.body.title,
       req.body.body,
       req.body.category_id,

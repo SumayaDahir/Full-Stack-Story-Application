@@ -21,15 +21,6 @@ function InfoPage() {
     dispatch({ type: "FETCH_STORY" });
   }, []);
 
-  // const handleSelectImage = () => {
-  //   dispatch({
-  //     type: "ADD_STORY",
-  //     payload: {
-  //       title,
-  //       body
-  //     },
-  //   });
-  // };
 
 
 
@@ -38,7 +29,7 @@ function InfoPage() {
     <div>
       <h3> {user.username}</h3>
       <img src={user.profile_picture} alt="profile picture" />
-      
+    
       
 
       {stories.map((story) => (
