@@ -1,3 +1,9 @@
+const MemoryStorage = require('memorystorage');
+
+
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ dest: 'uploads/' , storage});
 const express = require("express");
 const {
   rejectUnauthenticated,
@@ -30,15 +36,19 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
-router.post("/register", (req, res, next) => {
+
+
+
+router.post("/register", upload.single('profile_picture'), (req, res, next) => {
   const username = req.body.username;
+  const profile_picture = req.body.profile_picture;
   const email = req.body.email;
   const password = encryptLib.encryptPassword(req.body.password);
 
-  const queryText = `INSERT INTO "user" (username, email, password) 
-    VALUES ($1, $2, $3) RETURNING *`;
+  const queryText = `INSERT INTO "user" (username, profile_picture, email, password) 
+    VALUES ($1, $2, $3, $4) RETURNING *`;
   pool
-    .query(queryText, [username, email, password])
+    .query(queryText, [username, profile_picture, email, password])
     .then((result) => {
       res.send(result.rows[0]);
     })

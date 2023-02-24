@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [profilepicture, setProfilePicture] = useState('');
+  const [profile_picture, setProfilePicture] = useState('');
 
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
@@ -17,11 +18,18 @@ function RegisterForm() {
       type: 'REGISTER',
       payload: {
         username: username,
+        profile_picture: profile_picture,
         email: email,
         password: password,
       },
     });
   }; // end registerUser
+
+  // const handlePicture = (event) => {
+  //   console.log("in event files" , event.target.files)
+  //   setProfilePicture(event.target.files[0]);
+  // }
+
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
@@ -70,9 +78,21 @@ function RegisterForm() {
         </label>
       </div>
 
-    
+      <div>
+        <label htmlFor="profile_picture">
+          Upload Profile Picture:      
+         <input
+            type="text"
+            name="profile_picture"
+            value={profile_picture}
+            required
+            onChange={(event) => setProfilePicture(event.target.value)}
+          /> 
+        </label>
+      </div>
       <div>
         <input className="btn" type="submit" name="submit" value="Register" />
+     
       </div>
     </form>
   );

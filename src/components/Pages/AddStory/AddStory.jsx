@@ -116,14 +116,11 @@ function AddStory() {
       <br />
       {stories.map((story) => (
         <div key={story.id}>
-          <img src={story.profile_picture} alt="profile picture" />
+         
           <h6>{story.title}</h6>
           <p>{story.body}</p>
-          <button>❤️</button> <button>👍🏾</button> <button>🙌🏾</button>
           <button onClick={() => handleEdit(story)}>Edit Story</button>
-          <br />
-          {story.likes} {story.loves} {story.claps}
-          <br />
+         <br />
           <br />
           <button onClick={() => handleDelete(story.id)}>Delete Story</button>
         </div>
