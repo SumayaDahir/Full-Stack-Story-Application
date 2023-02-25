@@ -8,7 +8,7 @@ function InfoPage() {
 
 
   const user = useSelector((store) => store.user);
-  const stories = useSelector((store) => store.story);
+  const stories = useSelector((store) => store.publicStory);
 
   const [comments, setComments] = useState('')
   
@@ -21,24 +21,18 @@ function InfoPage() {
     dispatch({ type: "FETCH_STORY" });
   }, []);
 
-
-
-
   return (
-  
     <div>
       <h3> {user.username}</h3>
       <img src={user.profile_picture} alt="profile picture" />
-    
       
-
-      {stories.map((story) => (
-        <div key={story.id}>
-          <h6>{story.title}</h6>
-          <p>{story.body}</p>
+      {stories.map((publicStory) => (
+        <div key={publicStory.id}>
+          <h6>{publicStory.title}</h6>
+          <p>{publicStory.body}</p>
           <button>❤️</button> <button>👍🏾</button> <button>🙌🏾</button>
           <br />
-          {story.likes} {story.loves} {story.claps}
+          {publicStory.likes} {publicStory.loves} {publicStory.claps}
           <br />
 
           <div>
@@ -57,7 +51,6 @@ function InfoPage() {
           </div>
         </div>
       ))}
-
     </div>
 
   );

@@ -12,6 +12,7 @@ const userRouter = require('./routes/user.router');
 const storyRouter = require('./routes/story.router.js')
 const commentsRouter = require('./routes/comments.router.js')
 const categoriesRouter = require('./routes/categories.router.js')
+const publicStoryRouter = require('./routes/publicstory.router.js')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -29,7 +30,7 @@ app.use('/api/user', userRouter);
 app.use('/api/story', storyRouter);
 app.use('/api/comments', commentsRouter);
 app.use('/api/category', categoriesRouter);
-
+app.use('/api/publicstory', publicStoryRouter);
 
 // Serve static files
 app.use(express.static('build'));

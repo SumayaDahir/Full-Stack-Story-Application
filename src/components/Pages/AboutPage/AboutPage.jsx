@@ -11,12 +11,12 @@ import { useHistory } from 'react-router-dom';
 
 function AboutPage() {
   const user = useSelector((store) => store.user);
-  const stories = useSelector((store) => store.story);
+  const stories = useSelector((store) => store.publicStory);
   const dispatch = useDispatch();
   const history = useHistory() 
 
   useEffect(() => {
-    dispatch({ type: "FETCH_STORY" });
+    dispatch({ type: "FETCHPUBLIC_STORY" });
   }, []);
 
 
@@ -28,11 +28,11 @@ function AboutPage() {
 
       <h5> Click on {user.username}'s to read more! </h5>
 
-      {stories.map((story) => (
-        <div key={story.id}>
+      {stories.map((publicStory) => (
+        <div key={publicStory.id}>
      
-          <h6>{story.title}</h6>
-          <p>{story.body.substring(0, 100)}...</p>
+          <h6>{publicStory.title}</h6>
+          <p>{publicStory.body.substring(0, 100)}...</p>
           
         </div>
       ))}

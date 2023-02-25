@@ -3,6 +3,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import story from './story.reducer';
 import category from './category.reducer';
+import publicStory from './publicstory.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user,
   story,
-  category, // will have an id and username if someone is logged in
+  category,
+  publicStory, // will have an id and username if someone is logged in
 });
 
 export default rootReducer;

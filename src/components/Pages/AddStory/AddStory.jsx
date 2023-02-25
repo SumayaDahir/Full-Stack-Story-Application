@@ -7,6 +7,7 @@ function AddStory() {
   const stories = useSelector((store) => store.story);
   const categories = useSelector((store) => store.category);
   //console.log("in categories" , categories)
+ 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
