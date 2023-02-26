@@ -4,6 +4,7 @@ import user from './user.reducer';
 import story from './story.reducer';
 import category from './category.reducer';
 import publicStory from './publicstory.reducer';
+import publicUser from './publicuser.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   user,
   story,
   category,
-  publicStory, // will have an id and username if someone is logged in
+  publicStory, 
+  publicUser, // will have an id and username if someone is logged in
 });
 
 export default rootReducer;

@@ -9,10 +9,11 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
-const storyRouter = require('./routes/story.router.js')
-const commentsRouter = require('./routes/comments.router.js')
-const categoriesRouter = require('./routes/categories.router.js')
-const publicStoryRouter = require('./routes/publicstory.router.js')
+const storyRouter = require('./routes/story.router.js');
+const commentsRouter = require('./routes/comments.router.js');
+const categoriesRouter = require('./routes/categories.router.js');
+const publicStoryRouter = require('./routes/publicstory.router.js');
+const publicUserRouter = require('./routes/publicuser.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -31,6 +32,7 @@ app.use('/api/story', storyRouter);
 app.use('/api/comments', commentsRouter);
 app.use('/api/category', categoriesRouter);
 app.use('/api/publicstory', publicStoryRouter);
+app.use('/api/publicuser', publicUserRouter)
 
 // Serve static files
 app.use(express.static('build'));

@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import storySaga from './story.saga';
 import categorySaga from './category.saga';
 import publicStorySaga from './publicstory.saga';
+import publicUserSaga from './publicuser.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     storySaga(),
     categorySaga(),
     publicStorySaga(),
+    publicUserSaga(),
   ]);
 }
