@@ -33,5 +33,20 @@ router.put('/:id' , (req, res) => {
   });
 });
 
+router.put("/:id/loves", (req, res) => {
+  const storyId = req.params.id;
+  const { loves } = req.body;
+  const queryText = `UPDATE stories SET loves = $1 WHERE id = $2;`;
+  pool
+    .query(queryText, [loves, storyId])
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log("Error updating loves:", error);
+      res.sendStatus(500);
+    });
+});
+
 
 module.exports = router;

@@ -29,12 +29,25 @@ function* updatePublicStoryLikes(action) {
   }
 }
 
+function* updatePublicStoryLoves(action) {
+  try {
+    yield axios.put(`/api/publicstory/${action.payload.id}/loves`, {
+      loves: action.payload.loves,
+    });
+    yield put({
+      type: "FETCHPUBLIC_STORY",
+    });
+  } catch (error) {
+    console.log("User update public story likes failed",error)
+  }
+}
 
 
 
 function* publicStorySaga() {
     yield takeLatest("FETCHPUBLIC_STORY", fetchPublicStory);
-    yield takeLatest("UPDATE_LIKES", updatePublicStoryLikes)
+    yield takeLatest("UPDATE_LIKES", updatePublicStoryLikes);
+    yield takeLatest("UPDATE_LOVES", updatePublicStoryLoves);
   };
   
   export default publicStorySaga;

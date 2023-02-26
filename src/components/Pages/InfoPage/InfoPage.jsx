@@ -12,6 +12,7 @@ function InfoPage() {
 
   const [comments, setComments] = useState('')
     const [likes, setLikes] = useState(0);
+    const [loves, setLoves] = useState(0);
 
   
   //console.log("in categories" , categories)
@@ -34,6 +35,20 @@ function InfoPage() {
     setLikes(updatedLikes);
   };
 
+
+
+
+  const handleLove = (storyId) => {
+    const story = stories.find((story) => story.id === storyId);
+    const updatedLoves = story.loves + 1;
+    dispatch({
+      type: "UPDATE_LOVES",
+      payload: { id: storyId, loves: updatedLoves },
+    });
+    setLoves(updatedLoves);
+  };
+
+
   return (
     <div>
     {publicusers.map((publicUser) => (
@@ -47,7 +62,7 @@ function InfoPage() {
               <h6>{publicStory.title}</h6>
               <p>{publicStory.body}</p>
               <button onClick={() => handleLike(publicStory.id)}>❤️</button> 
-              <button>👍🏾</button> 
+              <button onClick={() => handleLove(publicStory.id)}>👍🏾</button> 
               <button>🙌🏾</button>
               <br />
               {publicStory.likes} {publicStory.loves} {publicStory.claps}
