@@ -38,8 +38,24 @@ function* updatePublicStoryLoves(action) {
       type: "FETCHPUBLIC_STORY",
     });
   } catch (error) {
-    console.log("User update public story likes failed",error)
+    console.log("User update public story loves failed",error)
   }
+}
+
+
+function* updatePublicStoryClaps(action) {
+  try{
+    
+    yield axios.put(`/api/publicstory/${action.payload.id}/claps`, {
+      claps: action.payload.claps,
+    });
+    yield put({
+      type: "FETCHPUBLIC_STORY",
+    });
+  } catch (error) {
+    console.log("User update public story claps failed",error)
+  }
+    
 }
 
 
@@ -48,6 +64,7 @@ function* publicStorySaga() {
     yield takeLatest("FETCHPUBLIC_STORY", fetchPublicStory);
     yield takeLatest("UPDATE_LIKES", updatePublicStoryLikes);
     yield takeLatest("UPDATE_LOVES", updatePublicStoryLoves);
+    yield takeLatest("UPDATE_CLAPS", updatePublicStoryClaps);
   };
   
   export default publicStorySaga;

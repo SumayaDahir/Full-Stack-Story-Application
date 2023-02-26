@@ -49,4 +49,20 @@ router.put("/:id/loves", (req, res) => {
 });
 
 
+router.put("/:id/claps", (req, res) => {
+  const storyId = req.params.id;
+  const { claps } = req.body;
+  const queryText = `UPDATE stories SET claps = $1 WHERE id = $2;`;
+  pool
+    .query(queryText, [claps, storyId])
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log("Error updating claps:", error);
+      res.sendStatus(500);
+    });
+});
+
+
 module.exports = router;

@@ -21,6 +21,16 @@ const publicStoryReducer = (state = [], action) => {
             return story;
           }
         });
+        case "UPDATE_PUBLIC_STORY_CLAPS":
+         const updatedClaps = action.payload;
+          return state.map((story) => {
+            if (story.id === updatedClaps.id) {
+              return  { ...story, claps: updatedClaps.claps };
+            } else {
+              return story;
+            }
+          });
+         
         
       default:
         return state;
