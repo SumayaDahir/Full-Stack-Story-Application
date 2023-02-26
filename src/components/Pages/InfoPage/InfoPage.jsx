@@ -7,7 +7,7 @@ import './InfoPage.css'
 function InfoPage() {
 
 
-  const user = useSelector((store) => store.user);
+  const publicusers = useSelector((store) => store.publicUser);
   const stories = useSelector((store) => store.publicStory);
 
   const [comments, setComments] = useState('')
@@ -18,13 +18,18 @@ function InfoPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: "FETCH_STORY" });
+    dispatch({ type: "FETCHPUBLIC_STORY"});
+    dispatch({type: "FETCHPUBLIC_USER"});
   }, []);
 
   return (
     <div>
-      <h3> {user.username}</h3>
-      <img src={user.profile_picture} alt="profile picture" />
+     {publicusers.map((publicUser) => (
+               <div key={publicUser.id}>
+                  <img src={publicUser.profile_picture} alt="profile picture" onClick={() => history.push("/info")} />
+                 
+                  </div>
+        ))} 
       
       {stories.map((publicStory) => (
         <div key={publicStory.id}>

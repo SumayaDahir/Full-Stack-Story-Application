@@ -5,7 +5,6 @@ const pool = require("../modules/pool.js");
 router.get("/" , (req, res) => {
     const queryText = `SELECT * FROM "user"
     `;
-
     pool
     .query(queryText)
     .then((result) => {
@@ -16,6 +15,5 @@ router.get("/" , (req, res) => {
         res.sendStatus(500)
     });
 });
-
 
 module.exports = router; 
