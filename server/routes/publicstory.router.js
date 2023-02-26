@@ -18,5 +18,20 @@ router.get("/", (req, res) => {
     });
 });
 
+router.put('/:id' , (req, res) => {
+  const storyId = req.params.id;
+  const { likes } = req.body;
+  console.log(req.params)
+  const queryText = `UPDATE stories SET likes = $1 WHERE id = $2;`;
+  pool.query(queryText, [likes, storyId])
+  .then(result => {
+    res.sendStatus(200);
+  })
+  .catch(error => {
+    console.log('Error updating likes:', error);
+    res.sendStatus(500);
+  });
+});
+
 
 module.exports = router;
