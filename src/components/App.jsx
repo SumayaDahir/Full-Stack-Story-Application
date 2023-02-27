@@ -60,11 +60,7 @@ function App() {
             <UserPage />
           </ProtectedRoute>
 
-          <Route
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/info"
-          >
+          <Route  path="/info/:userid">
             <InfoPage />
           </Route>
 

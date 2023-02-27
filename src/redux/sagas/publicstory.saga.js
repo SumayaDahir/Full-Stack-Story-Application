@@ -1,9 +1,9 @@
 import axios from "axios";
 import { put, takeLatest } from "redux-saga/effects";
 
-function* fetchPublicStory() {
+function* fetchPublicStory(action) {
   try {
-    const response = yield axios.get("/api/publicstory");
+    const response = yield axios.get(`/api/publicstory/`);
     const story = response.data;
     console.log("Get all:", story);
 

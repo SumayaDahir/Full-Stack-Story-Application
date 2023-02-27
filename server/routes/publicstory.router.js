@@ -4,8 +4,7 @@ const pool = require("../modules/pool.js");
 
 
 router.get("/", (req, res) => {
-  const queryText = `SELECT * FROM "stories"                                   
-`;
+  const queryText = `SELECT * FROM stories`;
 
   pool
     .query(queryText)

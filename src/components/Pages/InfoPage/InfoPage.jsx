@@ -1,108 +1,126 @@
-import React from 'react';
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import './InfoPage.css'
+import "./InfoPage.css";
+import { Grid } from "@mui/material";
+import { useParams } from "react-router-dom";
 
 function InfoPage() {
-
-
   const publicusers = useSelector((store) => store.publicUser);
+   
   const stories = useSelector((store) => store.publicStory);
+  console.log("in public stories useSelector" , stories)
+  console.log("in public users useSelector" , publicusers)
 
-  const [comments, setComments] = useState('')
-    const [likes, setLikes] = useState(0);
-    const [loves, setLoves] = useState(0);
-    const [claps, setClaps] = useState(0);
-
-  
-  //console.log("in categories" , categories)
  
+  
+  const [comments, setComments] = useState("");
+  const [likes, setLikes] = useState(0);
+  const [loves, setLoves] = useState(0);
+  const [claps, setClaps] = useState(0);
 
   const dispatch = useDispatch();
 
+  const params = useParams();
+  //const storyId = params.storyid;
+  const userId = params.userid;
+
+
+  console.log("in USSERID",userId)
+
+  //console.log("in STORYID",storyId)
+
+ 
+
+  const story = stories.find((story) => Number(userId) === Number(story.user_id));
+  console.log("in story", story)
+  const user = publicusers.find((user) => user.id ===  Number(userId));
+  console.log("in user", user)
+
   useEffect(() => {
-    dispatch({ type: "FETCHPUBLIC_STORY"});
-    dispatch({type: "FETCHPUBLIC_USER"});
+    dispatch({ type: "FETCHPUBLIC_STORY" });
+    dispatch({ type: "FETCHPUBLIC_USER" });
   }, []);
 
-  const handleLike = (storyId) => {
-    const story = stories.find((story) => story.id === storyId);
+  const handleLike = (id) => {
+    const story = stories.find((story) => story.id === id);
     const updatedLikes = story.likes + 1;
     dispatch({
       type: "UPDATE_LIKES",
-      payload: { id: storyId, likes: updatedLikes },
+      payload: { id: id, likes: updatedLikes },
     });
     setLikes(updatedLikes);
   };
 
-
-
-
-  const handleLove = (storyId) => {
-    const story = stories.find((story) => story.id === storyId);
+  const handleLove = (id) => {
+    const story = stories.find((story) => story.id === id);
     const updatedLoves = story.loves + 1;
     dispatch({
       type: "UPDATE_LOVES",
-      payload: { id: storyId, loves: updatedLoves },
+      payload: { id: id, loves: updatedLoves },
     });
     setLoves(updatedLoves);
   };
 
-
-
-  const handleClaps = (storyId) => {
-    const story = stories.find((story) => story.id === storyId);
+  const handleClaps = (id) => {
+    const story = stories.find((story) => story.id === id);
     const updatedClaps = story.claps + 1;
     dispatch({
       type: "UPDATE_CLAPS",
-      payload: { id: storyId, claps: updatedClaps },
+      payload: { id: id, claps: updatedClaps },
     });
-    setLoves(updatedLoves);
+    setClaps(updatedClaps);
   };
+
+ 
 
 
   return (
-    <div>
-    {publicusers.map((publicUser) => (
-      <div key={publicUser.id}>
-        <img src={publicUser.profile_picture} alt="profile picture"  />
-        <h5>  {publicUser.username} </h5>
-        {stories
-          .filter((publicStory) => publicStory.user_id === publicUser.id)
-          .map((publicStory) => (
-            <div key={publicStory.id}>
-              <h6>{publicStory.title}</h6>
-              <p>{publicStory.body}</p>
-              <button onClick={() => handleLike(publicStory.id)}>❤️</button> 
-              <button onClick={() => handleLove(publicStory.id)}>👍🏾</button> 
-              <button onClick={() => handleClaps(publicStory.id)}>🙌🏾</button>
-              <br />
-              {publicStory.likes} {publicStory.loves} {publicStory.claps}
-              <br />
-  
-              <div>
-                <label htmlFor="comments">
-                  Comments:
-                  <input 
-                    className='comment-textbox'
-                    type="text" 
-                    name='comments'
-                    value={comments}
-                    placeholder='Show Some Love and Drop a comment!'
-                    onChange={(event) => setComments(event.target.value)}
-                  />
-                </label>
+    <>
+      <Grid container spacing={20} >
+        <Grid
+          item
+          xs={6}
+          md={4}
+          key={user?.id}
+        
+          style={{ textAlign: "center" }}
+        >
+          <h3>{user?.username}</h3>
+          <img src={user?.profile_picture} alt="profile picture" />
+          
+          <>
+        <div >
+            <h5>{story?.title}</h5>
+            <p>{story?.body}</p>
+            <button onClick={() => handleLike(story.id)}>❤️</button>
+            <button onClick={() => handleLove(story.id)}>👍🏾</button>
+            <button onClick={() => handleClaps(story.id)}>🙌🏾</button>
+            <br />
+            <span className="number">{story?.likes}</span>
+            <span className="number">{story?.loves}</span>
+            <span className="number">{story?.claps}</span>
+            <br />
+            <div>
               </div>
+              <label htmlFor="comments">
+                Comments:
+                <input
+                  className="comment-textbox"
+                  type="text"
+                  name="comments"
+                  value={comments}
+                  placeholder="Show Some Love and Drop a comment!"
+                  onChange={(event) => setComments(event.target.value)}
+                
+                />
+                <button>Add Comment</button>
+              </label>
             </div>
-          ))
-        }
-      </div>
-    ))}
-  </div>
-  
-
+          </>
+        </Grid>
+      </Grid>
+    </>
   );
-}
+  }
 
 export default InfoPage;
