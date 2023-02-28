@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Grid, Card, CardContent, CardActions, Button} from '@mui/material'
+import './Register.css'
 
 
 function RegisterForm() {
@@ -32,6 +34,7 @@ function RegisterForm() {
 
 
   return (
+    
     <form className="formPanel" onSubmit={registerUser}>
       <h2>Register User</h2>
       {errors.registrationMessage && (
@@ -39,7 +42,7 @@ function RegisterForm() {
           {errors.registrationMessage}
         </h3>
       )}
-
+<div  >
 <div> 
   <label htmlFor="email">
     Email:
@@ -92,6 +95,7 @@ function RegisterForm() {
       </div>
       <div>
         <input className="btn" type="submit" name="submit" value="Register" />
+        </div>
      
       </div>
     </form>

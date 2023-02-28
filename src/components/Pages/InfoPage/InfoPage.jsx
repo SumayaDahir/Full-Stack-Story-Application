@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./InfoPage.css";
-import { Grid } from "@mui/material";
 import { useParams } from "react-router-dom";
+import { Grid, Card, CardContent, CardActions,  TextField, Button } from "@mui/material";
+
 
 function InfoPage() {
   const publicusers = useSelector((store) => store.publicUser);
@@ -71,52 +72,54 @@ function InfoPage() {
     setClaps(updatedClaps);
   };
 
- 
-
-
   return (
     <>
-      <Grid container spacing={20} >
+      <Grid container spacing={20} justifyContent="center" alignItems="center">
         <Grid
           item
-          xs={6}
-          md={4}
+          xs={12}
+          md={6}
+          sm={8}
           key={user?.id}
         
           style={{ textAlign: "center" }}
         >
+
+          <Card>
+            <CardContent>
           <h3>{user?.username}</h3>
           <img src={user?.profile_picture} alt="profile picture" />
-          
-          <>
-        <div >
+      
             <h5>{story?.title}</h5>
             <p>{story?.body}</p>
-            <button onClick={() => handleLike(story.id)}>❤️</button>
-            <button onClick={() => handleLove(story.id)}>👍🏾</button>
-            <button onClick={() => handleClaps(story.id)}>🙌🏾</button>
-            <br />
+            </CardContent>
+            <CardActions>
+            <Button className="numberbutton" onClick={() => handleLike(story.id)}>❤️</Button>
+            <Button  classname="numberbutton" onClick={() => handleLove(story.id)}>👍🏾</Button>
+            <Button onClick={() => handleClaps(story.id)}>🙌🏾</Button>
+            </CardActions>
+            <CardContent>
             <span className="number">{story?.likes}</span>
             <span className="number">{story?.loves}</span>
             <span className="number">{story?.claps}</span>
-            <br />
-            <div>
-              </div>
-              <label htmlFor="comments">
-                Comments:
-                <input
-                  className="comment-textbox"
+            </CardContent>
+            <CardContent>
+
+             <TextField label="Comments"
+             margin="normal"
+                 className="comment-textbox"
                   type="text"
                   name="comments"
                   value={comments}
-                  placeholder="Show Some Love and Drop a comment!"
-                  onChange={(event) => setComments(event.target.value)}
-                
-                />
-                <button>Add Comment</button>
-              </label>
-            </div>
-          </>
+                  placeholder="Show Some Love & Drop a comment!"
+                  onChange={(event) => setComments(event.target.value)}>
+
+              </TextField>
+              </CardContent>
+              <CardActions>
+              <Button>Post Comment</Button>
+              </CardActions>
+          </Card>
         </Grid>
       </Grid>
     </>

@@ -1,10 +1,16 @@
 .comment-textbox {
     width: 400px;
-    height: 200px;
+    height: 100px;
 }
 
-button {
-    margin-right: 20px;
+.numberbutton {
+    margin-right: 50px;
+  }
+  
+  img {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
   }
   
   .number {
