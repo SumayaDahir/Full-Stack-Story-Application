@@ -2,8 +2,9 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Grid, Card, CardContent, CardActions, TextField, Button} from '@mui/material'
-
+import { Grid, Card, CardContent, CardActions, TextField, TextArea, Button} from '@mui/material'
+import { color } from "@mui/system";
+import { MdDelete } from "react-icons/md";
 
 function AddStory() {
   const stories = useSelector((store) => store.story);
@@ -64,19 +65,20 @@ function AddStory() {
 
   return (
     <>
-    <Card className="form-container">
+    <Grid >
+    <Card className="addstoryform-container">
     <CardContent> 
-  <TextField label="Title"
+    <TextField label="Title"
  
-          type="text"
-          name="title"
-          value={title}
-          required
-          onChange={(event) => setTitle(event.target.value)}>
+ type="text"
+ name="title"
+ value={title}
+ required
+ onChange={(event) => setTitle(event.target.value)}>
 </TextField>
 </CardContent>
 <CardContent>
-  <TextField label='Story'
+<TextField label='Story'
             className="story-body"
             type="text"
             name="story"
@@ -101,13 +103,25 @@ function AddStory() {
           ))}
         </select>
         </CardActions>
+       
         <CardActions>
         {editing ? (
-          <Button type="button" onClick={handleUpdate}>
+          <Button 
+          sx={{
+            borderRadius: 50,
+            color: "white"
+          }}
+          className='card-button' 
+          type="button" onClick={handleUpdate}>
             Update Story
           </Button>
         ) : (
-          <Button type="button" onClick={handleSubmit}>
+          <Button  
+          sx={{
+            borderRadius: 50,
+            color: "white"
+          }}
+          className='card-button' type="button" onClick={handleSubmit}>
             Share Story
           </Button>
         )} </CardActions>
@@ -116,13 +130,31 @@ function AddStory() {
         <div key={story.id}>
           <h6>{story.title}</h6>
           <p>{story.body}</p>
-          <Button  variant="contained"  onClick={() => handleEdit(story)}>Edit Story</Button>
-       
-          <Button onClick={() => handleDelete(story.id)}>Delete Story</Button>
+          <Button 
+           sx={{
+            borderRadius: 50,
+            color: "white"
+          }}
+          className='card-button' onClick={() => handleEdit(story)}>Edit Story</Button>
+         <br />
+          <br />
+          <Button  
+           className='delete-button'
+          
+          sx={{
+           borderRadius: 50,
+           color: '#B71C1C'
+           }}
+          onClick={() => handleDelete(story.id)}>Delete Story  
+          <  MdDelete/>
+          </Button>
+        
         </div>
       ))}
       </CardContent>
+
    </Card>
+   </Grid>
     </>
   );
 }

@@ -1,5 +1,14 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  
+  }
+
 .banner-text {
  border-radius: 100px;
      border-top-left-radius: 70px;
      border-bottom-right-radius: 70px;
 }
+

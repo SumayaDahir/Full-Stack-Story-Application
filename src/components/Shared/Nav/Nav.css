@@ -1,13 +1,3 @@
-.nav {
-  /* flex box layout */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  margin: 0 0 30px;
-
-  overflow: hidden;
-}
 
 .nav a {
   text-decoration: none;
@@ -22,13 +12,13 @@
 }
 
 .navLink {
-  display: inline-block;
+font-family: 'chilanka';
   color: #f2f2f2;
- 
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
   font-size: 15px;
+  justify-content: flex-end;
 
   /* these last two make the logout button in
   the nav bar look like another link */

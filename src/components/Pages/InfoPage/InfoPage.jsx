@@ -72,6 +72,8 @@ function InfoPage() {
     setClaps(updatedClaps);
   };
 
+  
+
   return (
     <>
       <Grid container spacing={20} justifyContent="center" alignItems="center">

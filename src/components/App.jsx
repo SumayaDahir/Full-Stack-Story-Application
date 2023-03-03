@@ -21,6 +21,7 @@ import LoginPage from './Pages/LoginPage/LoginPage';
 import RegisterPage from './Pages/RegisterPage/RegisterPage';
 
 import './App.css';
+import RandomStory from './Pages/RandomStory/RandomStory';
 
 function App() {
   const dispatch = useDispatch();
@@ -90,6 +91,10 @@ function App() {
               // Otherwise, show the registration page
               <RegisterPage />
             }
+          </Route>
+          
+          <Route path="/randomstory">
+            <RandomStory/>
           </Route>
 
           <Route

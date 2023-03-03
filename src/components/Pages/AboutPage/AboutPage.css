@@ -1,0 +1,76 @@
+.aboutpage-container {
+    margin: 3rem;
+}
+
+.aboutpage-title { 
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: white;
+    opacity: 2.0;
+    background-color: #795548;
+}
+
+.aboutpage-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.aboutpage-cardtitle {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.aboutpage-cardimage {
+   cursor: pointer;
+}
+
+.aboutpage-cardstory {
+    margin-top: 1.5rem;
+
+}
+
+
+.aboutpage-cardbody {
+font-size: 1rem;
+margin-bottom: 0.5rem;
+}
+
+.delete-button {
+    background: linear-gradient(to right, #fdfdfd, #fdfdfd);
+    border:   #340000
+}
+
+
+.card-button {
+    background: linear-gradient(to right, #8B5A2B, #BC8F8F);
+    color: #fff;
+    border-radius: 50px;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin-top: auto;
+    transition: all 0.10s ease;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    animation: gradient-move 5s ease infinite;
+}
+
+@keyframes gradient-move {
+    from {
+      background-position: -100% center;
+    }
+    to {
+      background-position: 200% center;
+    }
+  }
+
+.card-button:hover {
+    background:   #40260e;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin-top: auto;
+}
+
