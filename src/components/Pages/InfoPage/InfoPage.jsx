@@ -7,10 +7,12 @@ import { Grid, Card, CardContent, CardActions,  TextField, Button } from "@mui/m
 
 function InfoPage() {
   const publicusers = useSelector((store) => store.publicUser);
-   
+  const comment = useSelector((store) => store.comments);
   const stories = useSelector((store) => store.publicStory);
-  console.log("in public stories useSelector" , stories)
-  console.log("in public users useSelector" , publicusers)
+
+  //console.log("in public stories useSelector" , stories)
+  //console.log("in public users useSelector" , publicusers)
+  console.log("in comments useSelector", comment)
 
  
   
@@ -36,10 +38,13 @@ function InfoPage() {
   console.log("in story", story)
   const user = publicusers.find((user) => user.id ===  Number(userId));
   console.log("in user", user)
+ 
+
 
   useEffect(() => {
     dispatch({ type: "FETCHPUBLIC_STORY" });
     dispatch({ type: "FETCHPUBLIC_USER" });
+    dispatch({ type: "FETCH_COMMENT" });
   }, []);
 
   const handleLike = (id) => {
@@ -70,6 +75,16 @@ function InfoPage() {
       payload: { id: id, claps: updatedClaps },
     });
     setClaps(updatedClaps);
+  };
+
+  const handleComment = () => {
+    dispatch({
+      type:"ADD_COMMENT",
+      payload: { 
+        comments,
+      },
+    });
+    setComments("");
   };
 
   
@@ -107,19 +122,24 @@ function InfoPage() {
             </CardContent>
             <CardContent>
 
-             <TextField label="Comments"
+             <TextField 
+             label="Comments"
              margin="normal"
                  className="comment-textbox"
                   type="text"
                   name="comments"
                   value={comments}
                   placeholder="Show Some Love & Drop a comment!"
-                  onChange={(event) => setComments(event.target.value)}>
-
-              </TextField>
+                  onChange={(event) => setComments(event.target.value)}
+                  />
+                  
               </CardContent>
+              {comment.map((comments) => 
+              <div> 
+                <h5>{comments.body}</h5>
+              </div>)}
               <CardActions>
-              <Button>Post Comment</Button>
+              <Button onClick={{handleComment}}>Post Comment</Button>
               </CardActions>
           </Card>
         </Grid>

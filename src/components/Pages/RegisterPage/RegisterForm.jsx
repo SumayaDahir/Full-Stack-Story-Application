@@ -16,6 +16,11 @@ function RegisterForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [profile_picture, setProfilePicture] = useState("");
+//   const [state, setState] = useState({
+//     file_url: null,
+//     file_type: "image",
+//     description: ''
+//  });
 
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
@@ -38,6 +43,25 @@ function RegisterForm() {
   //   console.log("in event files" , event.target.files)
   //   setProfilePicture(event.target.files[0]);
   // }
+
+
+//   const openWidget = () => {
+//     !!window.cloudinary && window.cloudinary.createUploadWidget(
+//        {
+//           sources: ['local', 'url', 'camera'],
+//           cloudName: process.env.dcl7nblh7 ,
+//           uploadPreset: process.env.dxfqu4mp,
+//        },
+//        (error, result) => {
+//           if (!error && result && result.event === "success") {
+//              setState({
+//                 ...state,
+//                 file_url: result.info.secure_url
+//              })
+//           }
+//        },
+//     ).open();
+//  }
 
   return (
     <div className="form-container">

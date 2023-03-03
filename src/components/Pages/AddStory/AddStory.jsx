@@ -5,9 +5,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { Grid, Card, CardContent, CardActions, TextField, Button, Dialog,
   DialogTitle, DialogContent, DialogContentText, DialogActions} from '@mui/material'
 import { MdDelete } from "react-icons/md";
+import UserPage from "../UserPage/UserPage";
 import './AddStory.css'
 
 function AddStory() {
+  const user = useSelector((store) => store.user);
   const stories = useSelector((store) => store.story);
   const categories = useSelector((store) => store.category);
   //console.log("in categories" , categories)
@@ -17,7 +19,7 @@ function AddStory() {
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [editing, setEditing] = useState(false);
   const [editingStory, setEditingStory] = useState(null);
-  const [openDialog, setOpenDialog] = useState(false);
+  
 
   const dispatch = useDispatch();
 
@@ -66,11 +68,13 @@ function AddStory() {
   };
 
   return (
-    <>
+    <div style={{ display: "flex", justifyContent: "center" }}>
     <Grid  justifyContent="center" sx={{ marginTop: "50px" }}>
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={10}>
     <Card  sx={{ borderRadius: "25px" }}>
     <CardContent> 
+    <h2>Welcome, {user.username}!</h2>
+      <h3> {user.username}'s story page.</h3>
     <TextField label="Title"
  
  type="text"
@@ -158,7 +162,10 @@ function AddStory() {
            borderRadius: 50,
            color: '#B71C1C'
            }}
-          onClick={() => handleDelete(story.id)}>Delete 
+          onClick={() => { if ( 
+            confirm("Are you sure you want to delete the story?")
+      ) {
+        handleDelete(story.id)}}}>Delete 
           <  MdDelete/>
           </Button>
         
@@ -170,7 +177,7 @@ function AddStory() {
    </Card>
    </Grid>
    </Grid>
-    </>
+    </div>
   );
 }
 

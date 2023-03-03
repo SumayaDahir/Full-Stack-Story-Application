@@ -3,7 +3,7 @@ import LogOutButton from '../../Shared/LogOutButton/LogOutButton';
 import {useSelector, useDispatch} from 'react-redux';
 import './UserPage.css'
 import AddStory from '../AddStory/AddStory'
-import { Card, CardContent } from '@mui/material';
+import { Card, CardContent, Grid} from '@mui/material';
 //import storySaga from '../../../redisux/sagas/story.saga';
 
 function UserPage() {
@@ -12,11 +12,11 @@ function UserPage() {
  
   return (
     <>
-    <Card>
+    <Grid container justifyContent={"center"} sx={{marginTop: "50px"}}>
+    <Grid item xs={12} md={6}>
+    <Card sx={{borderRadius: "25px"}}>
       <CardContent>
   
-      <h2>Welcome, {user.username}!</h2>
-      <h3> {user.username}'s story page.</h3>
       </CardContent>
       <CardContent>
       <img src={user.profile_picture} alt="profile picture" />
@@ -26,6 +26,8 @@ function UserPage() {
       </CardContent>
    
     </Card>
+    </Grid>
+    </Grid>
   </>
   );
       }
