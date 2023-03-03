@@ -1,0 +1,23 @@
+.category-dropdown {
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #D7CCC8;
+    color: #3E2723;
+}
+.category-dropdown option {
+    background-color: #D7CCC8;
+    color: #3E2723;
+}
+
+.category-dropdown:focus {
+    outline: none;
+    box-shadow: 0 0 2px #3E2723;
+  }
+
+.select-container{
+    background-color: #D7CCC8;
+    color: #3E2723;
+  }
+

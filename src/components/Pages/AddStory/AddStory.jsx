@@ -2,9 +2,10 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Grid, Card, CardContent, CardActions, TextField, TextArea, Button} from '@mui/material'
-import { color } from "@mui/system";
+import { Grid, Card, CardContent, CardActions, TextField, Button, Dialog,
+  DialogTitle, DialogContent, DialogContentText, DialogActions} from '@mui/material'
 import { MdDelete } from "react-icons/md";
+import './AddStory.css'
 
 function AddStory() {
   const stories = useSelector((store) => store.story);
@@ -16,6 +17,7 @@ function AddStory() {
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [editing, setEditing] = useState(false);
   const [editingStory, setEditingStory] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -65,8 +67,9 @@ function AddStory() {
 
   return (
     <>
-    <Grid >
-    <Card className="addstoryform-container">
+    <Grid  justifyContent="center" sx={{ marginTop: "50px" }}>
+      <Grid item xs={12} md={6}>
+    <Card  sx={{ borderRadius: "25px" }}>
     <CardContent> 
     <TextField label="Title"
  
@@ -74,7 +77,8 @@ function AddStory() {
  name="title"
  value={title}
  required
- onChange={(event) => setTitle(event.target.value)}>
+ onChange={(event) => setTitle(event.target.value)}
+ sx={{ marginBottom: "10px" , width: "rem" }}>
 </TextField>
 </CardContent>
 <CardContent>
@@ -84,17 +88,25 @@ function AddStory() {
             name="story"
             value={body}
             required
-            onChange={(event) => setBody(event.target.value)}>
+            multiline
+            rows={8}
+  
+            onChange={(event) => setBody(event.target.value)}
+            sx={{ marginBottom: "-20px", width:"50%", height: "-30px"}}>
         
        </TextField>
         </CardContent>
+        <br />
+        <br />
         <CardActions>
-        <label htmlFor="category">#categories</label>
+        <label htmlFor="category"  sx={{ marginBottom: "20px" }}></label>
+        <div className="select-container">
         <select
+        className="category-dropdown"
           name="category"
           onChange={(event) => setSelectedCategoryId(event.target.value)}
           id="category">
-          <option value="">Select Category</option>
+          <option  className="category-option" value="">Select #Category</option>
           {categories.map((category) => (
             <option value={category.id} key={category.id}>
               
@@ -102,6 +114,7 @@ function AddStory() {
             </option>
           ))}
         </select>
+        </div>
         </CardActions>
        
         <CardActions>
@@ -145,15 +158,17 @@ function AddStory() {
            borderRadius: 50,
            color: '#B71C1C'
            }}
-          onClick={() => handleDelete(story.id)}>Delete Story  
+          onClick={() => handleDelete(story.id)}>Delete 
           <  MdDelete/>
           </Button>
         
         </div>
       ))}
+      
       </CardContent>
 
    </Card>
+   </Grid>
    </Grid>
     </>
   );

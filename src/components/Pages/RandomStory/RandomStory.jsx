@@ -53,8 +53,9 @@ console.log("in user random story", user)
       <h1 className="aboutpage-title">Explore Stories</h1>
 {stories.length > 0 ? (
     <>
-        <Grid item xs={1} md={4}  style={{textAlign: 'center'}}>
-      <Card className="aboutpage-card">
+        <Grid item xs={12} md={8}  style={{textAlign: 'center'}}>
+      <Card sx={{ borderRadius: "25px" }}className="aboutpage-card"
+      >
         <CardContent>
           <h2 className='aboutpage-cardtitle'>Story of the Day</h2>
           <h3>{user?.username}</h3>

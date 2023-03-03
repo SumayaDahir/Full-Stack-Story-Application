@@ -20,7 +20,7 @@ function AboutPage() {
     dispatch({type: "FETCHPUBLIC_USER"});
   }, []);
 
-  
+
 
   return (
     <div className='aboutpage-container'>
@@ -28,7 +28,7 @@ function AboutPage() {
     <Grid container spacing={3}>
       {publicusers.map((publicUser) => (
         <Grid item xs={1} md={4} key={publicUser.id}  style={{textAlign: 'center'}}>
-<Card className='aboutpage-card'>
+<Card className='aboutpage-card'  sx={{ borderRadius: "25px" }}>
   <CardContent>
           <h4 className='aboutpage-cardtitle'>{publicUser.username}</h4>
           <img 
