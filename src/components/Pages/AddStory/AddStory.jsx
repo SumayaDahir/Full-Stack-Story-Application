@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Grid, Card, CardContent, CardActions, TextField, Button, Dialog,
   DialogTitle, DialogContent, DialogContentText, DialogActions} from '@mui/material'
 import { MdDelete } from "react-icons/md";
-import UserPage from "../UserPage/UserPage";
+import LogOutButton from "../../Shared/LogOutButton/LogOutButton";
 import './AddStory.css'
 
 function AddStory() {
@@ -171,7 +171,7 @@ function AddStory() {
         
         </div>
       ))}
-      
+        <LogOutButton/>
       </CardContent>
 
    </Card>

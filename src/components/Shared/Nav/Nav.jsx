@@ -30,7 +30,7 @@ function Nav() {
             }}
             >
          <IconButton edge="start">  
-         <MenuIcon></MenuIcon>
+         <MenuIcon style={{color: 'white'}}></MenuIcon>
          </IconButton>
         <Typography
             variant="h3"
@@ -48,7 +48,7 @@ function Nav() {
               textAlign: 'center',
             }}
           >
-      <nav sx={{
+      <nav className='nav' sx={{
                 display: { xs: 'none', md: 'flex' },
              
                 }}
@@ -60,7 +60,17 @@ function Nav() {
             Login
           </Link>
         )}
+
+{user.id && (
+          <>
+            <Link className="navLink" to="/user">
+              Home
+            </Link>
+          
+          </>
+        )}
         {/* If a user is logged in, show these links */ }
+           <div style={{display: "flex"}}>
             <Link  className="navLink" to="/randomstory">
             Daily Story
             </Link>
@@ -68,15 +78,8 @@ function Nav() {
         className="navLink" to="/about">
           #Explore
         </Link>
-        {user.id && (
-          <>
-            <Link className="navLink" to="/user">
-              Home
-            </Link>
-            
-            <LogOutButton className="navLink" />
-          </>
-        )}
+       
+        </div>
       </nav>
     
     </Typography>

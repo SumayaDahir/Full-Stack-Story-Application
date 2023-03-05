@@ -1,6 +1,23 @@
-
+.navLink {
+  font-family: 'chilanka';
+    color: #f2f2f2;
+    text-align: center;
+    padding: 24px 10px;
+    margin: 5px;
+    text-decoration: none;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+  
+  }
+  
+.nav {
+  display: flex;
+  flex-direction: row;
+}
 .nav a {
   text-decoration: none;
+  margin-left: 15px;
 }
 
 .nav-title {
@@ -11,23 +28,15 @@
   margin: 0;
 }
 
-.navLink {
-font-family: 'chilanka';
-  color: #f2f2f2;
-  text-align: center;
-  padding: 24px 10px;
-  text-decoration: none;
-  font-size: 15px;
-  justify-content: flex-end;
-
-  /* these last two make the logout button in
-  the nav bar look like another link */
-  border: none;
-  cursor: pointer;
-
-}
 
 .navLink:hover {
   background-color: #D7CCC8;
-  border-radius: 75px;
+  border-radius: 50px;
+}
+
+@media (max-width: 960px) {
+  .navLink {
+    padding: 10px;
+    font-size: 15px;
+  }
 }
