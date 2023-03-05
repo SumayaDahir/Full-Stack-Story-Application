@@ -15,7 +15,8 @@ function* fetchComment() {
 
 function* addComment(action) { 
     try {
-        yield axios.post("/api/comments/", action.payload);
+        const { user_id, story_id, body } = action.payload;
+        yield axios.post("/api/comments/", { user_id, story_id, body });
         yield put ({
             type: "FETCH_COMMENT",
         });
@@ -26,7 +27,7 @@ function* addComment(action) {
 
 function* commentSaga() {
     yield takeLatest("FETCH_COMMENT", fetchComment);
-    yield takeLatest("ADD_COMMENT", addComment);
+    yield takeLatest("ADDSTORY_COMMENT", addComment);
 }
 
 export default commentSaga;

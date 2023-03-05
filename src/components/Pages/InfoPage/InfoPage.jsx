@@ -16,7 +16,7 @@ function InfoPage() {
 
  
   
-  const [comments, setComments] = useState("");
+  const [commentsText, setCommentsText] = useState("");
   const [likes, setLikes] = useState(0);
   const [loves, setLoves] = useState(0);
   const [claps, setClaps] = useState(0);
@@ -38,6 +38,7 @@ function InfoPage() {
   console.log("in story", story)
   const user = publicusers.find((user) => user.id ===  Number(userId));
   console.log("in user", user)
+  const usercomments = comment.find((usercomments) => Number(userId) ===  (usercomments.user_id))
  
 
 
@@ -79,12 +80,14 @@ function InfoPage() {
 
   const handleComment = () => {
     dispatch({
-      type:"ADD_COMMENT",
+      type:"ADDSTORY_COMMENT",
       payload: { 
-        comments,
+        user_id: user.id,
+        story_id: story.id,
+        body: commentsText,
       },
     });
-    setComments("");
+    setCommentsText("");
   };
 
   
@@ -128,18 +131,21 @@ function InfoPage() {
                  className="comment-textbox"
                   type="text"
                   name="comments"
-                  value={comments}
+                  value={commentsText}
                   placeholder="Show Some Love & Drop a comment!"
-                  onChange={(event) => setComments(event.target.value)}
+                  onChange={(event) => setCommentsText(event.target.value)}
                   />
                   
               </CardContent>
-              {comment.map((comments) => 
-              <div> 
-                <h5>{comments.body}</h5>
+              {comment.filter((comment) => comment.story_id === story.id)
+              .map((comment) => 
+              <div key={comment.id}> 
+               <span><h6>{comment?.username}</h6> <img src={comment?.profile_picture}/></span>
+                <h5>{comment.body}</h5>
+               
               </div>)}
               <CardActions>
-              <Button onClick={{handleComment}}>Post Comment</Button>
+              <Button onClick={handleComment}>Post Comment</Button>
               </CardActions>
           </Card>
         </Grid>

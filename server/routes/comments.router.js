@@ -2,10 +2,20 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../modules/pool.js");
 
-router.get("/", (req, res) => {
-  const queryText = "SELECT * FROM comments";
+const {
+  rejectUnauthenticated,
+} = require("../modules/authentication-middleware");
+const encryptLib = require("../modules/encryption");
+const userStrategy = require("../strategies/user.strategy");
+
+router.get("/", rejectUnauthenticated, (req, res) => {
+  const queryText = `SELECT comments.id, comments.user_id, comments.story_id, comments.body, "user".username, "user".profile_picture
+  FROM comments 
+  JOIN "user" ON comments.user_id = "user".id
+  WHERE comments.user_id = $1;
+  `;
   pool
-    .query(queryText)
+    .query(queryText, [req.user.id])
     .then((result) => {
       res.send(result.rows);
     })
@@ -18,11 +28,13 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
     console.log(req.body);
+    const userId = req.user.id;
+console.log("in comments userid" , userId)
     const queryText = `INSERT INTO comments (user_id, story_id, body) 
       VALUES ($1, $2, $3) RETURNING *`;
   
     pool
-      .query(queryText, [req.body.user_id, req.body.story_id, req.body.body])
+      .query(queryText, [userId, req.body.story_id, req.body.body])
       .then((result) => {
         res.send(result.rows[0]);
       })
