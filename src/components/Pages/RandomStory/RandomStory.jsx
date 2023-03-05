@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Grid, Card, CardContent, CardActions } from "@mui/material";
 import { useParams } from "react-router-dom";
+import './RandomStory.css'
 
 function RandomStory() {
     const params = useParams();
@@ -49,18 +50,18 @@ console.log("in user random story", user)
 
 
   return (
-    <div className="aboutpage-container">
-      <h1 className="aboutpage-title">Explore Stories</h1>
+    <div className="randomstory-container">
+      <h1 className="randomstory-title">Experience the diversity of Human Stories</h1>
 {stories.length > 0 ? (
     <>
         <Grid item xs={12} md={8}  style={{textAlign: 'center'}}>
-      <Card sx={{ borderRadius: "25px" }}className="aboutpage-card"
+      <Card className="randomstory-card" sx={{ borderRadius: "25px" }}
       >
         <CardContent>
-          <h2 className='aboutpage-cardtitle'>Story of the Day</h2>
-          <h3>{user?.username}</h3>
-          <h4>{newstoryOfDay?.title}</h4>
-          <p>{ newstoryOfDay?.body}</p>
+          <h2 className='randomstory-cardtitle'>Story of the Day</h2>
+          <h3 className='randomstory-carduser'>{user?.username}</h3>
+          <h4 className='randomstory-storytitle'>{newstoryOfDay?.title}</h4>
+          <p className='randomstory-storybody'> { newstoryOfDay?.body}</p>
         </CardContent>
       </Card>
       </Grid> 
