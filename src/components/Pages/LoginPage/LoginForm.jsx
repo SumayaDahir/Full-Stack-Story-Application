@@ -30,18 +30,18 @@ function LoginForm() {
     <form className="formPanel" onSubmit={login}>
       
       <Typography   
-          style={{ color: "#3E2723" }}
+          style={{ color: "#fff" }}
           variant="h5"
           noWrap
           sx={{
             mr: 2,
-            padding: "15px",
+            padding: "25px",
             display: { md: "flex" },
             fontFamily: "Chilanka",
             fontWeight: 600,
             textDecoration: "none",
           }}>
-         Login
+         MyStory
       
 </Typography>
     
@@ -73,9 +73,11 @@ function LoginForm() {
 <br />
 <br/>
        <Button sx={{
-            borderRadius: 50,
-            color: "white",
-            margin:"10px"
+        backgroundColor:"#FFECB3",
+       
+            color: "#3E2723",
+            margin:"10px",
+            padding:"5px"
           }}
           className="btn" type="submit" name="submit" value="Log In" >
           Login

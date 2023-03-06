@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Grid,
-  Card,
-  CardContent,
-  CardActions,
   Button,
   TextField,
 } from "@mui/material";
@@ -65,7 +62,7 @@ function RegisterForm() {
 
   return (
     <div className="form-container">
-      <form className="formPanel" onSubmit={registerUser}>
+      <form className="formregisterPanel" onSubmit={registerUser}>
         <Typography className="formtext"
           style={{ color: "#3E2723" }}
           variant="h5"
@@ -77,6 +74,8 @@ function RegisterForm() {
             fontFamily: "Chilanka",
             fontWeight: 600,
             textDecoration: "none",
+            marginLeft:"250px",
+            marginBottom:"300px"
           }}>
           Register User
         </Typography>
@@ -128,9 +127,10 @@ function RegisterForm() {
             </Grid>
 
           <Button sx={{
-            borderRadius: 50,
-            color: "white",
-            margin:"10px"
+        backgroundColor:"#f2e1c1",
+            color: "#3E2723",
+            margin:"10px",
+            padding:"5px"
           }}
              className="btn" type="submit" name="submit" value="Register" >
           Register

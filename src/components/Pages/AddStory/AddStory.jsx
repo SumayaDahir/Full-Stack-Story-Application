@@ -155,7 +155,7 @@ function AddStory() {
       <Grid>
       {stories.map((story) => (
         <div key={story.id}>
-          <h6>{story.title}</h6>
+          <h3>{story.title}</h3>
           <p>{story.body}</p>
           <div className="story-actions">
           <Button 

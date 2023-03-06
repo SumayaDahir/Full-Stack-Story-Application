@@ -50,7 +50,7 @@ function RandomStory() {
   return (
     <div className="randomstory-container">
       <h1 className="randomstory-title">
-        Experience the diversity of Human Stories
+        Experience the diversity through Human Stories
       </h1>
       {stories.length > 0 ? (
         <>
