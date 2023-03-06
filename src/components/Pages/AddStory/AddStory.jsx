@@ -68,25 +68,25 @@ function AddStory() {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
-    <Grid  justifyContent="center" sx={{ marginTop: "50px" }}>
-      <Grid item xs={12} md={10}>
-    <Card  sx={{ borderRadius: "25px" }}>
+    <div style={{ display: "flex", justifyContent: "center" , flexDirection: "column"}}>
+        <div className="addstory-header"></div>
+    <Grid  container spacing={3} justifyContent="center" sx={{ marginTop: "40px", marginBottom:"-10px" }}>
+      <Grid item xs={12} md={13}>
+    <Card  sx={{ borderRadius: "25px", width:"400px" }}>
     <CardContent> 
     <h2>Welcome, {user.username}!</h2>
       <h3> {user.username}'s story page.</h3>
-    <TextField label="Title"
- 
+    <TextField 
+ label="Title"
  type="text"
  name="title"
  value={title}
  required
  onChange={(event) => setTitle(event.target.value)}
- sx={{ marginBottom: "10px" , width: "rem" }}>
-</TextField>
-</CardContent>
-<CardContent>
-<TextField label='Story'
+ sx={{ marginBottom: "10px", width: "50%" }}/>
+
+<TextField 
+            label='Story'
             className="story-body"
             type="text"
             name="story"
@@ -94,86 +94,100 @@ function AddStory() {
             required
             multiline
             rows={8}
-  
             onChange={(event) => setBody(event.target.value)}
-            sx={{ marginBottom: "-20px", width:"50%", height: "-30px"}}>
-        
-       </TextField>
-        </CardContent>
-        <br />
-        <br />
-        <CardActions>
-        <label htmlFor="category"  sx={{ marginBottom: "20px" }}></label>
+            sx={{ marginBottom: "40px", width:"100%"}}/>
         <div className="select-container">
         <select
         className="category-dropdown"
           name="category"
           onChange={(event) => setSelectedCategoryId(event.target.value)}
-          id="category">
+          id="category"
+          value={selectedCategoryId}>
           <option  className="category-option" value="">Select #Category</option>
           {categories.map((category) => (
             <option value={category.id} key={category.id}>
-              
               {category.name}
             </option>
           ))}
         </select>
         </div>
-        </CardActions>
+        </CardContent>
        
         <CardActions>
         {editing ? (
           <Button 
+          className='card-button' 
+          type="button"
+          onClick={handleUpdate}
           sx={{
             borderRadius: 50,
-            color: "white"
+            color: "#fff",
+            fontWeight:"bold",
+            backgroundColor: "#D7CCC8",
+            color:"#fff",
+            width:"100%",
           }}
-          className='card-button' 
-          type="button" onClick={handleUpdate}>
+          >
             Update Story
           </Button>
         ) : (
           <Button  
+          className='card-button' 
+          type="button" 
+          onClick={handleSubmit}
           sx={{
             borderRadius: 50,
-            color: "white"
+            color: "#fff",
+            fontWeight:"bold",
+            backgroundColor: "#D7CCC8",
+            color:"#fff"
           }}
-          className='card-button' type="button" onClick={handleSubmit}>
+         >
             Share Story
           </Button>
-        )} </CardActions>
+        )} 
+        </CardActions>
+
     <CardContent>
+      <Grid>
       {stories.map((story) => (
         <div key={story.id}>
           <h6>{story.title}</h6>
           <p>{story.body}</p>
+          <div className="story-actions">
           <Button 
+          className='edit-button'
+          onClick={() => handleEdit(story)}
            sx={{
             borderRadius: 50,
-            color: "white"
+            backgroundColor: "#3E2723",
+            color: "#fff",
+            marginRight: "15px",
+            marginLeft: "50px"
           }}
-          className='card-button' onClick={() => handleEdit(story)}>Edit Story</Button>
-         <br />
-          <br />
+          >
+          Edit Story
+          </Button>
+         
           <Button  
            className='delete-button'
-          
           sx={{
            borderRadius: 50,
            color: '#B71C1C'
            }}
           onClick={() => { if ( 
-            confirm("Are you sure you want to delete the story?")
+            confirm("Are you sure you want to delete this story?")
       ) {
-        handleDelete(story.id)}}}>Delete 
+        handleDelete(story.id)}}}>
+          Delete 
           <  MdDelete/>
           </Button>
-        
+        </div>
         </div>
       ))}
         <LogOutButton/>
+        </Grid>
       </CardContent>
-
    </Card>
    </Grid>
    </Grid>
