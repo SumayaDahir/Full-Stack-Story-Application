@@ -72,10 +72,8 @@ function AddStory() {
         <div className="addstory-header"></div>
     <Grid  container spacing={3} justifyContent="center" sx={{ marginTop: "40px", marginBottom:"-10px" }}>
       <Grid item xs={12} md={13}>
-    <Card  sx={{ borderRadius: "25px", width:"400px" }}>
+    <Card  sx={{ borderRadius: "25px", width:"400px",  marginLeft:"175px" }}>
     <CardContent> 
-    <h2>Welcome, {user.username}!</h2>
-      <h3> {user.username}'s story page.</h3>
     <TextField 
  label="Title"
  type="text"
@@ -123,9 +121,11 @@ function AddStory() {
             borderRadius: 50,
             color: "#fff",
             fontWeight:"bold",
-            backgroundColor: "#D7CCC8",
+            backgroundColor: "#3E2723",
             color:"#fff",
-            width:"100%",
+            '&:hover': {
+              backgroundColor: "#3E2723"
+            }
           }}
           >
             Update Story
@@ -140,7 +140,10 @@ function AddStory() {
             color: "#fff",
             fontWeight:"bold",
             backgroundColor: "#D7CCC8",
-            color:"#fff"
+            color:"#fff",
+            '&:hover': {
+              backgroundColor: "#3E2723"
+            }
           }}
          >
             Share Story
@@ -162,8 +165,11 @@ function AddStory() {
             borderRadius: 50,
             backgroundColor: "#3E2723",
             color: "#fff",
-            marginRight: "15px",
-            marginLeft: "50px"
+            '&:hover': {
+              backgroundColor: "#D7CCC8"
+            },
+            marginRight: "20px",
+            marginLeft: "70px"
           }}
           >
           Edit Story
@@ -173,7 +179,10 @@ function AddStory() {
            className='delete-button'
           sx={{
            borderRadius: 50,
-           color: '#B71C1C'
+           color: '#B71C1C',
+           '&:hover': {
+            backgroundColor: "#E57373"
+          },
            }}
           onClick={() => { if ( 
             confirm("Are you sure you want to delete this story?")
@@ -185,7 +194,7 @@ function AddStory() {
         </div>
         </div>
       ))}
-        <LogOutButton/>
+
         </Grid>
       </CardContent>
    </Card>

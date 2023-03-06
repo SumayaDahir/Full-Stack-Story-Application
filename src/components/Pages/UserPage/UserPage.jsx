@@ -12,15 +12,18 @@ function UserPage() {
  
   return (
     <>
-    <Grid container justifyContent={"center"} sx={{marginTop: "50px"}}>
+    <Grid container justifyContent="center"
+    sx={{marginTop: "50px"}}>
     <Grid item xs={12} md={6}>
-    <Card sx={{borderRadius: "25px"}}>
-      <CardContent>
-  
-      </CardContent>
-      <CardContent>
+    <Card sx={{borderRadius: "25px", 
+    marginBottom: "50px" }}>
+      <CardContent container justifyContent="center"
+      sx={{ marginTop: "20px" , marginBottom: "-20px" }}>
+      <h2 className="user-container">Welcome, {user.username}!</h2>
+      <h3 className="user-container"> This is your Writing Corner</h3>
+      <div className="profile-picture-container">
       <img src={user.profile_picture} alt="profile picture" />
-
+</div>
       <AddStory/>
       <LogOutButton className="btn" />
       </CardContent>

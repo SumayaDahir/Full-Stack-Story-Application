@@ -10,8 +10,13 @@ function LogOutButton(props) {
       // is passed to it from it's parents through React props
       sx={{
         borderRadius: 50,
-        color: "white",
-        margin:"10px"
+        color: "brown",
+        margin:"10px",
+        backgroundColor: "#3E2723",
+            color:"#fff",
+            '&:hover': {
+              backgroundColor: "#3E2723"
+            }
       }}
       onClick={() => dispatch({ type: 'LOGOUT' })}
     >
